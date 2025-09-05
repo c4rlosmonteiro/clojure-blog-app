@@ -8,7 +8,7 @@ services:
       - "27017:27017" # Map host port 27017 to container port 27017
     volumes:
       - mongodb_data:/data/db # Persist data in a named volume
-    restart: unless-stopped # Restart policy
+    #restart: unless-stopped # Restart policy
 
 volumes:
   mongodb_data: # Define the named volume for data persistence

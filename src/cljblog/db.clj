@@ -1,6 +1,8 @@
 (ns cljblog.db
   (:require [monger.core :as mg]
-            [monger.collection :as mc]))
+            [monger.operators :refer [$set]]
+            [monger.collection :as mc])
+  (:import (org.bson.types ObjectId)))
 
 (def collection-name "articles")
 
@@ -19,7 +21,21 @@
                   :body body
                   :created (new java.util.Date)}))
 
+(defn update-article
+  "This function will update an article into the database"
+  [article-id title body]
+  (mc/update-by-id db collection-name (ObjectId. article-id)
+              {$set
+               {:title title
+                :body body}}))
+
 (defn list-articles
       "This function will list all articles"
       []
       (mc/find-maps db collection-name))
+
+(defn find-article
+  "This function will find an article by its id"
+  [article-id]
+  (mc/find-map-by-id db collection-name (ObjectId. article-id)))
+
