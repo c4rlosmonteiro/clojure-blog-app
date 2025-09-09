@@ -14,6 +14,12 @@ To start a web server for the application, run:
 
     lein ring server
 
+or
+    lein run
+
+or 
+    APP_PORT=8080 lein run
+
 ## License
 
 Copyright © 2025 FIXME
